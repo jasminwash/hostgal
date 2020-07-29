@@ -1,4 +1,3 @@
 # hostgal
 
-Measuring and examining the properties of host galaxies of quasars.
-Working with Professor Michael Strauss.
+The properties of galaxies hosting quasars from the Sloan Digital Sky Survey (SDSS) Data Release 14 Quasar (DR14Q) catalog are analyzed. This analysis provides insight into the physical relation between quasars and the galaxies that host them. Wide co-added Hyper Suprime-Cam (HSC) images of the quasars were modeled by lenstronomy as a host galaxy and point source function (PSF), with the latter provided by the HSC database in the g,r,i,z, and y filters. The Sersic model properties for the host galaxy were first determined with lenstronomy using the image and PSF in the i filter since it has the highest contrast between the quasar and host galaxy. The values for the Sersic profile in this filter were then applied to the host galaxy model in the other four filters. RGB images were made using i,r,g and y,z,i to get a visual sense of the colors in the galaxy and by extension its properties. The g-i color was also calculated for each galaxy and studied as a function of redshift.
