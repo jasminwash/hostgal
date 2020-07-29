@@ -124,8 +124,7 @@ def colors(hostmag,zshift,name,baddies):
     ry.write("z color\n")
     
     for t in np.arange(0,len(hostmag),step=5):
-        if t==baddies[b]:
-            b+=1
+        if hostmag[t]==0:
             continue
         maglim=24
         imag=hostmag[t]
