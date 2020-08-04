@@ -86,6 +86,7 @@ def cshort(mag1,mag2,zshift):
 '''
         
 
+'''
 def colors(hostmag,zshift,name,baddies):
     c=open("colors.txt","w")
     r=0
@@ -124,7 +125,8 @@ def colors(hostmag,zshift,name,baddies):
     ry.write("z color\n")
     
     for t in np.arange(0,len(hostmag),step=5):
-        if hostmag[t]==0:
+        if t==baddies[b]:
+            b+=1
             continue
         maglim=24
         imag=hostmag[t]
@@ -195,7 +197,7 @@ def colors(hostmag,zshift,name,baddies):
     ry.close()
 
     return gicolor,ricolor,izcolor,iycolor,grcolor,zycolor,gzcolor,gycolor,rzcolor,rycolor
-
+'''
 
 # In[2]:
 
@@ -212,7 +214,9 @@ rc22=([])
 baddies=([])
 
 q=open("hostmag.dat","w")
+sers=open("sersresults.dat","w")
 q.write("ID filter hostmag\n")
+sers.write("ID filter results\n")
 #numfile+2
 for j in np.arange(2,numfile+2):
     fils=['I','G','R','Z','Y']
@@ -246,7 +250,8 @@ for j in np.arange(2,numfile+2):
         rc22.append(0)
         baddies.append(k)
         for l in range(len(fils)):
-            q.write("%s %s 0\n" %(sdssid,fils[l]))
+            q.write("%s %s 0\n" %(sdssid,fils[l])) 
+            sers.write("%s %s 0\n" %(sdssid,fils[l])) 
         continue
     decomp_info_psf,c2maskpsf=dpsf(hsc_fits_file, hsc_psf_file, False, False, False, sdssid)
     if abs(c2mask-c2maskpsf)<7:
@@ -264,6 +269,7 @@ for j in np.arange(2,numfile+2):
         baddies.append(k)
         for l in range(len(fils)):
             q.write("%s %s 0 \n" %(sdssid,fils[l]))
+            sers.write("%s %s 0\n" %(sdssid,fils[l])) 
         continue
     hostamp.append(decomp_info['host_amp'])
     hostmag.append(decomp_info['host_mag'])
@@ -273,6 +279,7 @@ for j in np.arange(2,numfile+2):
     rc21.append(decomp_info['redu_Chisq'])
     rc22.append(decomp_info_psf['redu_Chisq'])
     q.write("%s I %f\n" %(sdssid,decomp_info['host_mag']))
+    sers.write("%s I %s\n" %(sdssid,str(decomp_info)))
     filters=['G','R','Z','Y']
 #    locs=[j+1,j+2,j+3,j+4]
 #    continue
@@ -292,6 +299,7 @@ for j in np.arange(2,numfile+2):
         hostmag.append(decomp_info_1['host_mag'])
         decomps.append(decomp_info_1)
         q.write("%s %s %f\n" %(sdssid,filters[f],decomp_info_1['host_mag']))
+        sers.write("%s %s %s\n" %(sdssid,filters[f],str(decomp_info_1)))
 
         
     path2='/Users/jasminwashington/Google Drive File Stream/My Drive/usrp/git_repo/hostgal/py_tools/targets/shortlist/'+sdssid+'/'
@@ -345,6 +353,7 @@ for j in np.arange(2,numfile+2):
     #k+=1
 
 q.close()
+sers.close()
 # In[3]:
 
 
@@ -358,6 +367,7 @@ print(baddies)
 print(hostmag)
 #print(decomps)
 
+'''
 gicolor,ricolor,izcolor,iycolor,grcolor,zycolor,gzcolor,gycolor,rzcolor,rycolor=colors(hostmag,zshift,name,baddies)
 
 fig,((ax1,ax2),(ax3,ax4)) = plt.subplots(2, 2, sharex=True, sharey=True, figsize=(16,12))
@@ -368,6 +378,7 @@ ax1.scatter(grcolor[0],grcolor[1],label='g-r')
 ax2.scatter(ricolor[0],ricolor[1],label='r-i')
 ax3.scatter(izcolor[0],izcolor[1],label='i-z')
 ax4.scatter(zycolor[0],zycolor[1],label='z-y')
+'''
 #ax2.scatter(grcolor[0],grcolor[1],label='g-r')
 #ax2.scatter(zycolor[0],zycolor[1],label='z-y')
 #ax2.scatter(gzcolor[0],gzcolor[1],label='g-z')
@@ -377,6 +388,7 @@ ax4.scatter(zycolor[0],zycolor[1],label='z-y')
 
 #ax1.legend()
 #ax2.legend()
+'''
 ax1.set_title("g-r, %i sources"%(len(grcolor[0])))
 ax2.set_title("r-i, %i sources"%(len(ricolor[0])))
 ax3.set_title("i-z, %i sources"%(len(izcolor[0])))
@@ -392,7 +404,7 @@ fig.savefig("colorfromz0727.png",bbox_inches='tight')
 #for i in range (len(izcolor[0])):
 #    plt.text(izcolor[0]+0.00025,izcolor[1][i],name[i])
 #    plt.text(zshift[i]+0.00025,ricolor[i],name[i])
-
+'''
 
 # In[ ]:
 
